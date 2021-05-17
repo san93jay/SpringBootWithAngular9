@@ -1,0 +1,56 @@
+﻿<h1 *ngIf="isAddMode">Add Employee</h1>
+<form [formGroup]="employeeFormGroup" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="employeeName">Employee Name</label>
+            <input type="text" formControlName="employeeName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.employeeName.errors }" />
+            <div *ngIf="submitted && f.employeeName.errors" class="invalid-feedback">
+                <div *ngIf="f.employeeName.errors.required">Employee Name is required</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="department">Department</label>
+            <select formControlName="department" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.department.errors }">
+                <option>Choose Department</option>
+                <option *ngFor="let department of departments">{{department}}</option>
+              </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="contact">Contact</label>
+            <input type="text" formControlName="contact" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" />
+            <div *ngIf="submitted && f.contact.errors" class="invalid-feedback">
+                <div *ngIf="f.contact.errors.required">Contact is required</div>
+                <div *ngIf="f.contact.errors.pattern">Please, Enter 10 digit Contact Number.</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="email">
+                Email
+            </label>
+            <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+                <div *ngIf="f.email.errors.pattern">Please, Enter Correct Email Id.</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="age">Age</label>
+            <input type="number" formControlName="age" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.age.errors }" />
+            <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+                <div *ngIf="f.age.errors.required">Age is required</div>
+                <div *ngIf="f.age.errors.pattern">Please, Enter 1 to 3 digit Age.</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Save
+        </button>
+        <a routerLink="/employee" class="btn btn-link">Cancel</a>
+    </div>
+</form>
