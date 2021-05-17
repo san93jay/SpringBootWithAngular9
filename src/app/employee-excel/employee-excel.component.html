@@ -1,0 +1,57 @@
+<div class="st-form-container">
+
+    <form [formGroup]="docUploadFormGroup" (ngSubmit)="uploadEmployeeDetailsBYExcelSheet()">
+        <div class="ml-4">
+            <h4>
+                <button type="button" mat-raised-button class=""
+                    onclick="document.getElementById('fileInput').click()">
+                    SELECT FILE
+                    
+                </button>
+                <span *ngIf="currentFileToUpload">
+                    Selected File: {{currentFileToUpload.name}}
+                </span>
+
+                <input id="fileInput" name="fileInput" type="file" accept=".xlsx" (change)="onFileChange($event)"
+                    style="display:none;">
+                <label style="color: red" *ngIf="!currentFileToUpload">Please select a file having .xlsx
+                    extension.</label>
+            </h4>
+
+            <label>NOTE: Select a file having .xlsx extension.</label>
+        </div>
+        <div style="float: right;">
+            <button  class="btn btn-primary" (click)="downLoadSampleExcelSheet()">DownLoad Employeee Sample File</button>
+        </div>
+        <br />
+        <div class="form-action-buttons-container" style="width:94%; margin-top: 30px;">
+            <button class="ml-4 btn-sm" type="submit" style="float: right; background: #8269f1; color: white; border: 2px solid #8269f1; line-height: 28px;" mat-raised-button>UPLOAD</button>
+            <button class="btn-sm" type="button" style="float: right; color: #8269f1; border: 2px solid #8269f1; line-height: 28px;" routerLink="/employee">CANCEL</button>
+        </div>
+    </form>
+
+</div>
+<br>
+<hr>
+<table *ngIf="isTableShow" class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 20%">Invalid Name Row</th>
+            <th style="width: 20%">Invalid Email Row</th>
+            <th style="width: 20%">Blank Email Row</th>
+            <th style="width: 20%">Invalid Contact Row</th>
+            <th style="width: 10%">Invalid Department Row</th>
+            <th style="width: 10%">Invalid Age Row</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr >
+            <td>{{excelSheetResponse.invalidNameList}}</td>
+            <td>{{excelSheetResponse.emailCommaSeperatedList}}</td>
+            <td>{{excelSheetResponse.emailDoesNotExistList}}</td>
+            <td>{{excelSheetResponse.invalidContactList}}</td>
+            <td>{{excelSheetResponse.invalidDepartmentList}}</td>
+            <td>{{excelSheetResponse.emptyAndInvalidAge}}</td>
+        </tr>
+    </tbody>
+</table>

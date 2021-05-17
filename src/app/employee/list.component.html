@@ -1,0 +1,26 @@
+﻿<h1>Employee</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Add Employee</a>
+<br>
+<a routerLink="addExcel" class="btn btn-sm btn-success mb-2">Add Employee Excel</a>
+<button style="float: right;" class="btn btn-primary" (click)="downLoadEmployee()">DownLoad Employee List</button>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 20%">Name</th>
+            <th style="width: 20%">Email</th>
+            <th style="width: 20%">Contact</th>
+            <th style="width: 20%">Department</th>
+            <th style="width: 20%">Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let emp of employeeList">
+            <td>{{emp.employeeName}}</td>
+            <td>{{emp.email}}</td>
+            <td>{{emp.contact}}</td>
+            <td>{{emp.department}}</td>
+            <td>{{emp.age}}</td>
+        </tr>
+    </tbody>
+</table>
